@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <title>用户管理</title>
+    <link href="Lib/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+
+        <div class="row bg-primary">
+            <div class="col-sm-12">
+                <h1>用户管理系统</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <span class="input-group-addon">编号</span>
+                    <input type="text" id="txtId" value="0"
+                           disabled
+                           class="form-control" />
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <span class="input-group-addon">姓名</span>
+                    <input type="text" id="txtName" value=""
+                           class="form-control" />
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <span class="input-group-addon">邮件</span>
+                    <input type="text" id="txtEmail" value=""
+                           class="form-control" />
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <div class="btn-group">
+                    <button class="btn btn-default">操作</button>
+                    <button class="btn btn-default dropdown-toggle" 
+                            data-toggle="dropdown">
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">保存</a></li>
+                        <li><a href="#" onclick="doFind();">搜索</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12" style="height:80vh">
+                <table class="table table-hover table-bordered table-striped">
+                   <thead>
+                       <tr class="bg-primary">
+                           <th>编号</th>
+                           <th>姓名</th>
+                           <th>邮件</th>
+                           <th>操作</th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       <tr>
+                           <td>1</td>
+                           <td>刘备</td>
+                           <td>liu@sina.com</td>
+                           <td>
+                               <div class="btn-group">
+                                   <button class="btn btn-success">编辑</button>
+                                   <button class="btn btn-danger">删除</button>
+                               </div>
+                           </td>
+                       </tr>
+                   </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row bg-primary">
+            <div class="col-sm-12">
+                版权声明&copy;项目开发组
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="Lib/js/jquery.slim.min.js"></script>
+    <script src="Lib/js/bootstrap.min.js"></script>
+    <script>
+        var userList = [
+            { id: 1, name: "刘备", email: "liu@sina.com" },
+            { id: 2, name: "曹操", email: "cao@sina.com" },
+            { id: 3, name: "孙权", email: "sun@sina.com" },
+        ];
+
+        function loadData(list) {
+            $("tbody").html("");
+            for (var i = 0; i < list.length; i++) {
+                var user = list[i];
+                var row = "<tr>";
+                row += "<td>" + user.id + "</td>";
+                row += "<td>" + user.name + "</td>";
+                row += "<td>" + user.email + "</td>";
+                row += "<td>";
+                row += "<div class='btn - group'>";
+                row += "<button class='btn btn-success'>编辑</button>";
+                row += "<button class='btn btn-danger' > 删除</button > ";
+                row += "</div>";
+                row += "</td>";
+                row += "</tr>";
+                $("tbody").append(row);
+            }
+        }
+        $(function () {
+            loadData(userList);
+        })
+
+        function doFind() {
+            var name = $("#txtName").val();
+            var uList = [];
+            for (var i = 0; i < userList.length; i++) {
+                if (userList[i].name.indexOf(name) != -1) {
+                    uList.push(userList[i]);
+                }
+            }
+            loadData(uList);
+        }
+    </script>
+</body>
+</html>
